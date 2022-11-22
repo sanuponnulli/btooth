@@ -95,7 +95,9 @@ class _MyAppState extends State<MyApp> {
           height: PosTextSize.size2,
           width: PosTextSize.size2,
         ),
-        linesAfter: 1);
+        linesAfter: 0);
+    bytes += generator.hr(len: 30, ch: " ");
+
     bytes += generator.text("FRIENDI 50 SR",
         styles: PosStyles(
           align: PosAlign.center,
@@ -103,7 +105,9 @@ class _MyAppState extends State<MyApp> {
           width: PosTextSize.size2,
         ),
         linesAfter: 0);
-    bytes += generator.text("Purchase details",
+    bytes += generator.hr(len: 30, ch: " ");
+
+    bytes += generator.text("-Purchase details-",
         styles: PosStyles(
           align: PosAlign.center,
         ),
@@ -138,7 +142,7 @@ class _MyAppState extends State<MyApp> {
     bytes += generator.row([
       PosColumn(text: "", width: 1),
       PosColumn(
-          text: "Date",
+          text: "Date: ",
           width: 3,
           styles: PosStyles(
             align: PosAlign.left,
@@ -156,7 +160,7 @@ class _MyAppState extends State<MyApp> {
     bytes += generator.row([
       PosColumn(text: "", width: 1),
       PosColumn(
-          text: "Time",
+          text: "Time: ",
           width: 3,
           styles: PosStyles(
             align: PosAlign.left,
@@ -174,7 +178,7 @@ class _MyAppState extends State<MyApp> {
     bytes += generator.row([
       PosColumn(text: "", width: 1),
       PosColumn(
-          text: "Serial No:",
+          text: "Serial No: ",
           width: 3,
           styles: PosStyles(
             align: PosAlign.left,
@@ -192,7 +196,7 @@ class _MyAppState extends State<MyApp> {
     bytes += generator.row([
       PosColumn(text: "", width: 1),
       PosColumn(
-          text: "Token ID",
+          text: "Token ID: ",
           width: 3,
           styles: PosStyles(
             align: PosAlign.left,
@@ -224,18 +228,19 @@ class _MyAppState extends State<MyApp> {
     //   PosColumn(text: "1", width: 2, styles: PosStyles(align: PosAlign.center)),
     //   PosColumn(text: "70", width: 2, styles: PosStyles(align: PosAlign.right)),
     // ]);
-    bytes += generator.text("",
-        styles: PosStyles(
-          align: PosAlign.center,
-        ),
-        linesAfter: 1);
+    // bytes += generator.text("",
+    //     styles: PosStyles(
+    //       align: PosAlign.center,
+    //     ),
+    //     linesAfter: 1);
+    bytes += generator.hr(len: 30, ch: " ");
     bytes += generator.text("Activation Number",
         styles: PosStyles(
           align: PosAlign.center,
           height: PosTextSize.size2,
           width: PosTextSize.size1,
         ),
-        linesAfter: 1);
+        linesAfter: 0);
     bytes += generator.hr(len: 30);
     bytes += generator.text("78558458745455",
         styles: PosStyles(
@@ -243,7 +248,7 @@ class _MyAppState extends State<MyApp> {
           height: PosTextSize.size2,
           width: PosTextSize.size2,
         ),
-        linesAfter: 1);
+        linesAfter: 0);
 
     bytes += generator.hr(len: 30);
     bytes += generator.text("Recharge information",
@@ -252,7 +257,7 @@ class _MyAppState extends State<MyApp> {
           height: PosTextSize.size2,
           width: PosTextSize.size1,
         ),
-        linesAfter: 1);
+        linesAfter: 0);
     bytes += generator.hr(len: 30);
     bytes += generator.text("*4545#serial",
         styles: PosStyles(
@@ -260,7 +265,7 @@ class _MyAppState extends State<MyApp> {
           height: PosTextSize.size1,
           width: PosTextSize.size1,
         ),
-        linesAfter: 1);
+        linesAfter: 0);
 
     bytes += generator.hr(len: 30);
 
