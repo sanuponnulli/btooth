@@ -18,12 +18,15 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    // _checkDeviceBluetoothIsOn();
   }
 
   bool connected = false;
+  int check = 0;
   List availableBluetoothDevices = [];
 
   Future<void> getBluetooth(BuildContext cc) async {
+    check += 1;
     final List? bluetooths = await BluetoothThermalPrinter.getBluetooths;
     print("Print $bluetooths");
 
@@ -36,14 +39,9 @@ class _MyAppState extends State<MyApp> {
     final String? result = await BluetoothThermalPrinter.connect(mac);
     print("state conneected $result");
     if (result == "true") {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Device connected now take the print")));
       setState(() {
         connected = true;
       });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Device not connected try Again!")));
     }
   }
 
@@ -327,7 +325,12 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Search Paired Bluetooth"),
+                availableBluetoothDevices.isEmpty && check > 0
+                    ? Text(
+                        "Turn Bluetooth on before seraching",
+                        style: TextStyle(color: Colors.red),
+                      )
+                    : Text("Search Paired Bluetooth"),
                 TextButton(
                   onPressed: () async {
                     PermissionStatus location =
@@ -340,7 +343,13 @@ class _MyAppState extends State<MyApp> {
                         await Permission.bluetoothAdvertise.request();
                     // PermissionStatus near =
                     // await Permission.nearbyWifiDevices.request();
-                    print(location.isGranted);
+                    // final tr = await flutterBlue.isOn;
+                    // print(location.isGranted);
+                    // bool tr = await _checkDeviceBluetoothIsOn();
+                    // print(tr);
+                    // if (!tr)
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //       SnackBar(content: Text("turn blue tooth on")));
 
                     if (location.isGranted &&
                         btooth.isGranted &&
@@ -384,10 +393,14 @@ class _MyAppState extends State<MyApp> {
                 // ),
                 TextButton(
                   style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blueAccent)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromARGB(255, 202, 235, 255))),
                   onPressed: connected ? this.printTicket : null,
-                  child: Text("Print Ticket"),
+                  child: Text(
+                    "Print Ticket",
+                    style: TextStyle(
+                        color: connected ? Colors.black : Colors.white),
+                  ),
                 ),
                 Center(
                   child: Container(
@@ -399,13 +412,15 @@ class _MyAppState extends State<MyApp> {
                         child: Column(
                           children: [
                             Icon(Icons.info_rounded),
-                            Text(
-                                maxLines: 3,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15),
-                                "you should pair yor phone with the printer atleast once before you search for the printers avilable"),
+                            FittedBox(
+                              child: Text(
+                                  maxLines: 3,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
+                                  "you should pair yor phone with the printer\nAtleast once before you search for the printers avilable"),
+                            ),
                           ],
                         ),
                       )),
